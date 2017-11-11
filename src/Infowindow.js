@@ -1,44 +1,34 @@
 /*global google*/
 import React, { Component } from 'react';
-import Sidebar from './Sidebar';
+
 
 var map;
 let infowindow;
-let places;
-class Map extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      center: {
-        lat: null,
-        lng: null
-      },
-      zoom: 16,
-    };
-  }
+class Infowindow extends Component {
   componentDidMount() {
-    this.Geocode(this)
+    this.map = new google.maps.Map(this.refs.map, {
+      center: {
+        lat: 48.858608,
+        lng: 2.294471
+      },
+      zoom: 16
+    });
+    
+    this.Geocode(this.map);
+    //SearchBox.bindTo('bounds', this.map);
   }
-  Geocode(self) {
+  componentDidUpdate() {
+    
+  }
+  Geocode(map) {
     if (navigator.geolocation) {
       console.log("geo");
        navigator.geolocation.getCurrentPosition(function(position) {
-        // var pos = {
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude
-        // };
-        self.setState({
-          center: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          },
-          zoom: 16
-        });
-        map = new google.maps.Map(self.refs.map, {
-          center: self.state.center,
-          zoom: self.state.zoom
-        });
-        // map.setCenter(self.state.center);
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(pos);
         infowindow = new google.maps.InfoWindow();
         const service = new google.maps.places.PlacesService(map);
         service.textSearch({
@@ -48,7 +38,6 @@ class Map extends Component {
           // type: ['restaurant']
           
         }, function(results, status) {
-          places = results;
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
               let place = results[i];
@@ -78,13 +67,9 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="window">
-        <Sidebar />
-        <div ref="map" id="map">
-        </div>
+      <div ref="map" id="map">
       </div>
     );
   }
 }
-
-export {Map, places};
+export default Infowindow;
