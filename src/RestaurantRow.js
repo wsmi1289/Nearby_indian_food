@@ -40,6 +40,7 @@ class RestaurantRow extends Component {
   			fullAddress = place.formatted_address.toString(),
   			stop = fullAddress.search(/\d+(?!.*\d)/),
   			address = fullAddress.substr(0, (stop));
+  			
     return (
 			<div className="RestaurantRow">
         <h3 className="rest_name">{place.name}</h3>

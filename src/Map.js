@@ -21,7 +21,6 @@ class Map extends Component {
   }
   Geocode(self) {
     if (navigator.geolocation) {
-      console.log("geo");
        navigator.geolocation.getCurrentPosition(function(position) {
         self.setState({
           center: {

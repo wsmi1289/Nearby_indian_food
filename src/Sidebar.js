@@ -8,11 +8,13 @@ class Sidebar extends Component {
     return (
       <div className="sidebar">
         <h1>Closest Indian Restaurants</h1>
-        {places.map(function(place, i){
-          if (i <= 3) {
-            return <RestaurantRow data={JSON.stringify(place)} key={i} map={map}/>;
-          }
-        })}
+        {
+          places.map(function(place, i){
+            if (i <= 3) {
+              return <RestaurantRow data={JSON.stringify(place)} key={i} map={map}/>;
+            }
+          })
+        }
         
       </div>
     );
