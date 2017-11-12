@@ -1,8 +1,5 @@
-/*global google*/
 import React, { Component } from 'react';
-import Map from './Map';
 var Rating = require('react-rating');
-	var place;
 
 class Reviews extends Component {
 

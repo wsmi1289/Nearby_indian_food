@@ -1,9 +1,7 @@
 /*global google*/
 import React, { Component } from 'react';
-import Map from './Map';
 import Review from './Review';
 var Rating = require('react-rating');
-	var place;
 
 class RestaurantRow extends Component {
 	constructor(props) {
@@ -23,10 +21,9 @@ class RestaurantRow extends Component {
   				placeId: id
 				},
 				service = new google.maps.places.PlacesService(this.props.map),
-				self = this,
-				place_details;
+				self = this;
 		service.getDetails(request, function(place_details, status) {
-			if (status == google.maps.places.PlacesServiceStatus.OK) {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
     		self.setState({place: place_details})
   		}
 		});
