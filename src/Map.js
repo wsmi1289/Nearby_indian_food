@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 
 var map;
 let infowindow;
-let places;
+//var places;
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,8 @@ class Map extends Component {
         lat: null,
         lng: null
       },
-      zoom: 16,
+      zoom: 12,
+      places: null,
     };
   }
   componentDidMount() {
@@ -32,7 +33,7 @@ class Map extends Component {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           },
-          zoom: 16
+          zoom: 12
         });
         map = new google.maps.Map(self.refs.map, {
           center: self.state.center,
@@ -42,17 +43,19 @@ class Map extends Component {
         infowindow = new google.maps.InfoWindow();
         const service = new google.maps.places.PlacesService(map);
         service.textSearch({
+          // bounds: map.getBounds(),
           location: map.getCenter(),
           radius: 1000,
           query: ['indian restaurant']
           // type: ['restaurant']
           
         }, function(results, status) {
-          places = results;
+          self.setState({places: results});
+          //var bounds = new google.maps.LatLngBounds();
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
               let place = results[i];
-
+              //bounds.extend(place.geometry.location);
               let marker = new google.maps.Marker({
                 map: map,
                 position: place.geometry.location
@@ -75,11 +78,20 @@ class Map extends Component {
       console.log("no geo");
     }
   }
+  renderSide() {
+    if (this.state.places !== null) {
+     let places=this.state.places;
+     return (
+      <Sidebar places={places} map={map}/>
+      )
+    }
+  }
 
   render() {
+    
     return (
       <div className="window">
-        <Sidebar />
+        {this.renderSide()}
         <div ref="map" id="map">
         </div>
       </div>
@@ -87,4 +99,4 @@ class Map extends Component {
   }
 }
 
-export {Map, places};
+export default Map;

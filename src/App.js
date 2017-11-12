@@ -1,6 +1,6 @@
 /*global google*/
 import React, { Component } from 'react';
-import {Map, places} from './Map';
+import Map from './Map';
 import './App.css';
 
 let infowindow;
