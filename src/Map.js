@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 
 var map;
 let infowindow;
-//var places;
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +23,6 @@ class Map extends Component {
     if (navigator.geolocation) {
       console.log("geo");
        navigator.geolocation.getCurrentPosition(function(position) {
-        // var pos = {
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude
-        // };
         self.setState({
           center: {
             lat: position.coords.latitude,
@@ -39,23 +34,18 @@ class Map extends Component {
           center: self.state.center,
           zoom: self.state.zoom
         });
-        // map.setCenter(self.state.center);
         infowindow = new google.maps.InfoWindow();
         const service = new google.maps.places.PlacesService(map);
         service.textSearch({
-          // bounds: map.getBounds(),
           location: map.getCenter(),
           radius: 1000,
           query: ['indian restaurant']
-          // type: ['restaurant']
           
         }, function(results, status) {
           self.setState({places: results});
-          //var bounds = new google.maps.LatLngBounds();
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
               let place = results[i];
-              //bounds.extend(place.geometry.location);
               let marker = new google.maps.Marker({
                 map: map,
                 position: place.geometry.location

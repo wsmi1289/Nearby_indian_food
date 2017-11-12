@@ -23,12 +23,6 @@ class Reviews extends Component {
     			</li>
 
     			<p>{place.reviews[0].text}</p>
-			{/* 
-					<li>{place.reviews.rating}</li>
-    			<li>{place..reviews.text}</li>
-    			<li>{place.}</li>
-    			<li>{place.}</li>
-			*/}
     		</ul>
     	</div>
     );
@@ -36,7 +30,3 @@ class Reviews extends Component {
 }
 
 export default Reviews;
-
-	// <button className="Reviews" onClick={()=>this.props.onClick()}>
-				
- //      </button>
