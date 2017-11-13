@@ -14,10 +14,16 @@ class Clock extends Component {
     this.setTimer();
   }
 
+  /******************
+  *
+  ***/
   setTimer() {
   	setTimeout(this.updateClock.bind(this), 1000);
   }
 
+  /******************
+  *
+  ***/
   updateClock() {
 		const currentTime = new Date();
     this.setState({
