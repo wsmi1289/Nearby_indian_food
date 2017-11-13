@@ -10,7 +10,7 @@ class Sidebar extends Component {
       directionsVisible: false
     }
     this.handler = this.handler.bind(this);
-    //this.displayDirections = this.displayDirections.bind(this);
+    this.removeDirections = this.removeDirections.bind(this);
     this.directionsService = new google.maps.DirectionsService(),
     this.map = this.props.map,
     this.directionsDisplay = new google.maps.DirectionsRenderer();
@@ -18,10 +18,9 @@ class Sidebar extends Component {
   /******************
   *
   ***/
-  componentDidMount() {
-    this.directionsDisplay.setMap(this.map);
-    this.directionsDisplay.setPanel(document.getElementById('sidebar'));
-  }
+  // componentDidMount() {
+    
+  // }
   /******************
   *
   ***/
@@ -50,6 +49,8 @@ class Sidebar extends Component {
   *
   ***/
   displayDirections(place) {
+    this.directionsDisplay.setMap(this.map);
+    this.directionsDisplay.setPanel(document.getElementById('sidebar'));
     const end = place.formatted_address;
     this.directionsService.route({
       origin: this.map.getCenter(),
@@ -64,6 +65,12 @@ class Sidebar extends Component {
     })
   }
 
+  removeDirections() {
+    this.setState({directionsVisible: !this.state.directionsVisible})
+    this.directionsDisplay.setMap(null);
+    this.directionsDisplay.setPanel(document.getElementById('hidden'));
+  }
+
   render() {
     var places = this.props.places,
         map = this.props.map;
@@ -73,11 +80,12 @@ class Sidebar extends Component {
 
         <h1>Closest Indian Restaurants</h1>
         {
-          places.map((place, i) => {
-            if (i <= 3) {
-              return <RestaurantRow data={JSON.stringify(place)} key={i} map={map} handler={this.handler} sendData={this.getData}/>;
-            }
-          })
+          this.state.directionsVisible ? <button onClick={this.removeDirections} >Back</button> :
+            places.map((place, i) => {
+              if (i <= 3) {
+                return <RestaurantRow data={JSON.stringify(place)} key={i} map={map} handler={this.handler} sendData={this.getData}/>;
+              }
+            })
         }
         
       </div>

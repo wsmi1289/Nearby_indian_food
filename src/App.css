@@ -36,6 +36,10 @@
   margin-bottom: 5px;
 }
 
+.rest_name:hover {
+  color: rgba(100, 100, 100, .5);
+}
+
 address {
   width: 100%;
   margin: 0 auto 5px auto;
@@ -45,6 +49,11 @@ address {
 .review {
   font-size: .8em;
   background-color: rgba(200, 200, 200, .5);
+}
+
+.hours {
+  font-size: 1em;
+  color: black;
 }
 
 .review_list {
@@ -59,10 +68,19 @@ button {
   color: white;
 }
 
+button:hover {
+  background-color: rgba(200, 200, 200, .5);
+  color: #222;
+}
+
 .glyphicon {
   font-size: 1.5em;
 }
 
 .author {
   font-size: 1.2em;
+}
+
+#hidden {
+  display: none;
 }
