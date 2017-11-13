@@ -12,12 +12,18 @@ class RestaurantRow extends Component {
 		//	directionsVisible: false
 		}
 	};
-
+	
+  /******************
+  *
+  ***/
 	componentDidMount() {
 		var placeObj = JSON.parse(this.props.data);
 		this.getPlaceDetails(placeObj.place_id);
 	}
 
+  /******************
+  *
+  ***/
 	getPlaceDetails(id) {
 		var request = {
   				placeId: id
@@ -30,6 +36,10 @@ class RestaurantRow extends Component {
   		}
 		});
 	};
+
+  /******************
+  *
+  ***/
 	renderReview() {
 		if (this.state.place !== null) {
 			let id = this.state.place.place_id;
@@ -38,36 +48,6 @@ class RestaurantRow extends Component {
 		}
 	}
 
-	// sendDataProp() {
-	// 	this.props.sendData(value)
-	// }
-	// showDirections() {
- //    	this.setState({
- //    		directionsVisible: !this.state.directionsVisible
- //    	})
- //    	console.log(this.state.directionsVisible);
- //    	this.directionsRequest();
- //  }
-
-  // directionsRequest() {
-  //   const directionsService = new google.maps.DirectionsService(),
-  //         map = this.props.map,
-  //         directionsDisplay = new google.maps.DirectionsRenderer(),
-  //         place = JSON.parse(this.props.data);
-  //   directionsDisplay.setMap(map);
-  //   directionsDisplay.setPanel(document.getElementById('sidebar'));
-  //   directionsService.route({
-  //     origin: map.getCenter(),
-  //     destination: place.geometry.location,
-  //     travelMode: 'DRIVING'
-  //   }, function(response, status) {
-  //   	if (status === 'OK') {
-  //   		directionsDisplay.setDirections(response);
-  //   	} else {
-  //   		window.alert('Directions request failed due to ' + status);
-  //   	}
-  //   })
-  // }
   render() {
   	var place = JSON.parse(this.props.data),
   			fullAddress = place.formatted_address.toString(),
