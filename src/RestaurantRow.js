@@ -9,14 +9,16 @@ class RestaurantRow extends Component {
 		this.state = {
 			place: null,
 			visible: false,
+		//	directionsVisible: false
 		}
 	};
+
 	componentDidMount() {
 		var placeObj = JSON.parse(this.props.data);
 		this.getPlaceDetails(placeObj.place_id);
 	}
-	getPlaceDetails(id) {
 
+	getPlaceDetails(id) {
 		var request = {
   				placeId: id
 				},
@@ -35,15 +37,47 @@ class RestaurantRow extends Component {
 			document.getElementById(id).remove();
 		}
 	}
+
+	// sendDataProp() {
+	// 	this.props.sendData(value)
+	// }
+	// showDirections() {
+ //    	this.setState({
+ //    		directionsVisible: !this.state.directionsVisible
+ //    	})
+ //    	console.log(this.state.directionsVisible);
+ //    	this.directionsRequest();
+ //  }
+
+  // directionsRequest() {
+  //   const directionsService = new google.maps.DirectionsService(),
+  //         map = this.props.map,
+  //         directionsDisplay = new google.maps.DirectionsRenderer(),
+  //         place = JSON.parse(this.props.data);
+  //   directionsDisplay.setMap(map);
+  //   directionsDisplay.setPanel(document.getElementById('sidebar'));
+  //   directionsService.route({
+  //     origin: map.getCenter(),
+  //     destination: place.geometry.location,
+  //     travelMode: 'DRIVING'
+  //   }, function(response, status) {
+  //   	if (status === 'OK') {
+  //   		directionsDisplay.setDirections(response);
+  //   	} else {
+  //   		window.alert('Directions request failed due to ' + status);
+  //   	}
+  //   })
+  // }
   render() {
   	var place = JSON.parse(this.props.data),
   			fullAddress = place.formatted_address.toString(),
   			stop = fullAddress.search(/\d+(?!.*\d)/),
   			address = fullAddress.substr(0, (stop));
-  			
     return (
 			<div className="RestaurantRow">
-        <h3 className="rest_name">{place.name}</h3>
+        <h3 className="rest_name" onClick ={this.props.handler} >
+        	{place.name}
+        </h3>
         <address>{address}</address>
 				<Rating initialRate={place.rating} className="stars"
 					empty={<span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>}
