@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
 
-let map,
-    infowindow;
+var map;
+var infowindow;
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +61,7 @@ class Map extends Component {
       center: this.state.center,
       zoom: this.state.zoom
     });
-    infowindow = new google.maps.InfoWindow();
+    
     // return map;
   }
 
@@ -69,6 +69,7 @@ class Map extends Component {
   *
   ***/
   placeService() {
+    //infowindow = new google.maps.InfoWindow();
     const service = new google.maps.places.PlacesService(map);
     service.textSearch({
       location: map.getCenter(),
@@ -84,10 +85,10 @@ class Map extends Component {
             map: map,
             position: place.geometry.location
           });
-          google.maps.event.addListener(marker, 'click', function() {
-            this.infowindow.setContent(place.name);
-            this.infowindow.open(map, this);
-          });
+          // google.maps.event.addListener(marker, 'click', () => {
+          //   infowindow.setContent(place.name);
+          //   infowindow.open(map, this);
+          // });
 
         };
       }
