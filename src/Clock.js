@@ -39,7 +39,7 @@ class Clock extends Component {
     return (
       <div className="clock">
  				{
- 					hours == 0 ? 12 :
+ 					hours === 0 ? 12 :
  						(hours > 12) ?
  							hours - 12 : hours
  				}:{

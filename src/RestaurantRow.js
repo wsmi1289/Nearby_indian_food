@@ -55,18 +55,26 @@ class RestaurantRow extends Component {
   			address = fullAddress.substr(0, (stop));
     return (
 			<div className="RestaurantRow">
-        <h3 className="rest_name" onClick ={this.props.handler} >
-        	{place.name}
-        </h3>
-        <address>{address}</address>
-				<Rating initialRate={place.rating} className="stars"
-					empty={<span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>}
-      		full={<span className="glyphicon glyphicon-star" aria-hidden="true"></span>} 
-      	/>
-      	<br/>
-        <button onClick={()=>this.renderReview()} id={place.place_id}>More Info</button>
+        	<h3 className="rest_name" onClick ={this.props.handler} >
+        			{place.name}
+        	</h3>
+        	<address>
+        			{address}
+        	</address>
+					<Rating initialRate={place.rating} className="stars"
+							empty={<span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>}
+      				full={<span className="glyphicon glyphicon-star" aria-hidden="true"></span>} 
+      		/>
+      		<br/>
+        	<button onClick={()=>this.renderReview()} id={place.place_id}>
+        			More Info
+        	</button>
         {
-        	this.state.visible ? <Review details={this.state.place} map={this.props.map} /> : null
+        	this.state.visible 
+        				?
+        	<Review details={this.state.place} map={this.props.map} /> 
+        				: 
+        	null
         }
       </div>
     );

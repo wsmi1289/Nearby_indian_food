@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import RestaurantRow from './RestaurantRow';
 import Clock from './Clock';
-var place;
+// var place;
 class Sidebar extends Component {
   constructor(props) {
     super(props);
@@ -11,16 +11,16 @@ class Sidebar extends Component {
     }
     this.handler = this.handler.bind(this);
     this.removeDirections = this.removeDirections.bind(this);
-    this.directionsService = new google.maps.DirectionsService(),
-    this.map = this.props.map,
-    this.directionsDisplay = new google.maps.DirectionsRenderer();
+    
   };
   /******************
   *
   ***/
-  // componentDidMount() {
-    
-  // }
+  componentDidMount() {
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+    this.map = this.props.map;
+  }
   /******************
   *
   ***/
@@ -53,7 +53,7 @@ class Sidebar extends Component {
     this.directionsDisplay.setPanel(document.getElementById('sidebar'));
     const end = place.formatted_address;
     this.directionsService.route({
-      origin: this.map.getCenter(),
+      origin: this.props.center,
       destination: end,
       travelMode: 'DRIVING'
     }, (response, status) => {
@@ -73,25 +73,26 @@ class Sidebar extends Component {
   }
 
   render() {
-    var places = this.props.places,
-        map = this.props.map,
-        visible = this.state.directionsVisible;
+    const {places, map} = this.props;
+    var visible = this.state.directionsVisible;
         if (visible) {
           this.refs.title.style.display = "none";
         }
     return (
       <div id="sidebar">
         <Clock />
-      <h1 ref="title">Closest Indian Restaurants</h1> .
+          <h1 ref="title">Closest Indian Restaurants</h1> .
         {
-          visible ? <button onClick={this.removeDirections} >Back</button> :
-            places.map((place, i) => {
+          visible
+                  ? 
+          <button onClick={this.removeDirections} >Back</button> 
+                  :
+          places.map((place, i) => {
               if (i <= 3) {
-                return <RestaurantRow data={JSON.stringify(place)} key={i} map={map} handler={this.handler} sendData={this.getData}/>;
+                  return <RestaurantRow data={JSON.stringify(place)} key={i} map={map} handler={this.handler} sendData={this.getData}/>;
               }
-            })
+          })
         }
-        
       </div>
     );
   }
