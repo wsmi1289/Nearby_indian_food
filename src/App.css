@@ -64,12 +64,12 @@ address {
 
 button {
   border-radius: 7px;
-  background-color: #222;
-  color: white;
+  background-color: rgba(240, 240, 240, .5);
+  color: #222;
 }
 
 button:hover {
-  background-color: rgba(200, 200, 200, .5);
+  background-color: rgba(180, 180, 180, .5);
   color: #222;
 }
 

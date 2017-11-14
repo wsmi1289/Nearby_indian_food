@@ -34,7 +34,7 @@ class Sidebar extends Component {
   *
   ***/
   matchPlace(event) {
-    const places = this.props.places, //all place data from textSearch
+    const {places} = this.props, //all place data from textSearch
           placeName = event.target.textContent; //Event target obj from click
     let matchingPlace;
     places.map((place, i) => {
