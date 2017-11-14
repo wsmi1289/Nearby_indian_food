@@ -53,32 +53,7 @@ class Map extends Component {
   /******************
   *
   ***/
-<<<<<<< HEAD
-  placeService() {
-    //infowindow = new google.maps.InfoWindow();
-    const {center} = this.state;
-    const service = new google.maps.places.PlacesService(map);
-    service.textSearch({
-      location: center,
-      radius: 5000,
-      query: ['indian restaurant']
-          
-    }, (results, status) => {
-      this.setState({places: results});
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          let place = results[i];
-          let marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          // google.maps.event.addListener(marker, 'click', () => {
-          //   infowindow.setContent(place.name);
-          //   infowindow.open(map, this);
-          // });
 
-        };
-=======
   createMarker(places) {
     //const places = this.state.places;
     //console.log(places);
@@ -94,7 +69,6 @@ class Map extends Component {
             });
       } else {
         break;
->>>>>>> place_from_app
       }
     }
     this.setState({places: finalPlaces});
