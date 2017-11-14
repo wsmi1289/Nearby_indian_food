@@ -70,10 +70,11 @@ class Map extends Component {
   ***/
   placeService() {
     //infowindow = new google.maps.InfoWindow();
+    const {center} = this.state;
     const service = new google.maps.places.PlacesService(map);
     service.textSearch({
-      location: map.getCenter(),
-      radius: 1000,
+      location: center,
+      radius: 5000,
       query: ['indian restaurant']
           
     }, (results, status) => {
