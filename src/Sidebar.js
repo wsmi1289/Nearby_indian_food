@@ -69,18 +69,22 @@ class Sidebar extends Component {
     this.setState({directionsVisible: !this.state.directionsVisible})
     this.directionsDisplay.setMap(null);
     this.directionsDisplay.setPanel(document.getElementById('hidden'));
+    this.refs.title.style.display = "block";
   }
 
   render() {
     var places = this.props.places,
-        map = this.props.map;
+        map = this.props.map,
+        visible = this.state.directionsVisible;
+        if (visible) {
+          this.refs.title.style.display = "none";
+        }
     return (
       <div id="sidebar">
         <Clock />
-
-        <h1>Closest Indian Restaurants</h1>
+      <h1 ref="title">Closest Indian Restaurants</h1> .
         {
-          this.state.directionsVisible ? <button onClick={this.removeDirections} >Back</button> :
+          visible ? <button onClick={this.removeDirections} >Back</button> :
             places.map((place, i) => {
               if (i <= 3) {
                 return <RestaurantRow data={JSON.stringify(place)} key={i} map={map} handler={this.handler} sendData={this.getData}/>;
